@@ -17,42 +17,55 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                @{
-                  switch(ViewData["CurPage"])
-                  {
-                    case "0":
-                      <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Головна</a>
-                      <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
-                      <a class="nav-item nav-link" href="#">Pricing</a>
-                      <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                    break;
-                    case "1":
-                      <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
-                      <a class="nav-item nav-link active" asp-controller="Home" asp-action="Doctors">Лікарі</a>
-                      <a class="nav-item nav-link" href="#">Pricing</a>
-                      <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                    break;
-                    case "2":
+                    @{
+                        switch (ViewData["CurPage"])
+                        {
+                            case "0":
+                                <a class="nav-item nav-link active" asp-controller="Home" asp-action="Index">Головна</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Reform">Медична реформа</a>
+                                <a class="nav-item nav-link" asp-controller="Pills" asp-action="All" asp-route-id="1">Ліки онлайн</a>
+                                break;
+                            case "1":
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
+                                <a class="nav-item nav-link active" asp-controller="Home" asp-action="Doctors">Лікарі</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Reform">Медична реформа</a>
+                                <a class="nav-item nav-link" asp-controller="Pills" asp-action="All" asp-route-id="1">Ліки онлайн</a>
+                                break;
+                            case "2":
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
+                                <a class="nav-item nav-link active" asp-controller="Home" asp-action="Reform">Медична реформа</a>
+                                <a class="nav-item nav-link" asp-controller="Pills" asp-action="All" asp-route-id="1">Ліки онлайн</a>
+                                break;
+                            case "3":
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Reform">Медична реформа</a>
+                                <a class="nav-item nav-link active" asp-controller="Pills" asp-action="All" asp-route-id="1">Ліки онлайн</a>
+                            break;
+                            default:
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
+                                <a class="nav-item nav-link" asp-controller="Home" asp-action="Reform">Медична реформа</a>
+                                <a class="nav-item nav-link" asp-controller="Pills" asp-action="All" asp-route-id="1">Ліки онлайн</a>
+                            break;
+                        }
+                    }
 
-                    break;
-                    default:
-                      <a class="nav-item nav-link" asp-controller="Home" asp-action="Index">Головна</a>
-                      <a class="nav-item nav-link" asp-controller="Home" asp-action="Doctors">Лікарі</a>
-                      <a class="nav-item nav-link" href="#">Pricing</a>
-                      <a class="nav-item nav-link disabled" href="#">Disabled</a>
-                    break;
-                  }
-                }
-                    
-                    
+
                 </div>
             </div>
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="pb-3 w-100">
             @RenderBody()
         </main>
+    </div>
+    
+    <div class="container-fluid pl-0 pr-0">
+      @RenderSection("containerFluid", required: false)
     </div>
     <footer class="footer mt-auto navbar-dark bg-dark text-muted pt-4">
       <div class="container">
@@ -64,7 +77,7 @@
         <div class="col-6 col-md">
           <ul class="list-unstyled text-small">
             <li><a class="text-muted" href="#">Про нас</a></li>
-            <li><a class="text-muted" href="#">Медична реформа</a></li>
+            <li><a class="text-muted" asp-controller="Home" asp-action="Reform">Медична реформа</a></li>
             <li><a class="text-muted" href="#">Страхування</a></li>
             <li><a class="text-muted" href="#">Контакти</a></li>
             <li><a class="text-muted" href="#">Згода користувача</a></li>

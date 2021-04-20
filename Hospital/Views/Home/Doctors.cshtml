@@ -27,43 +27,48 @@
     @foreach(var doctor in Model)
     {
         <div class="card">
-            <img class="card-img-top" src="~/Pictures/Doctors/@doctor.Picture" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@doctor.Name</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-            <div class="card-footer">
-                <small class="text-muted">Last updated 3 mins ago</small>
-            </div>
+            <a href="doctors/details/@doctor.Id" class="text-decoration-none text-dark">
+                <img class="card-img-top" src="~/Pictures/Doctors/@doctor.Picture" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@doctor.Name</h5>
+                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                </div>
+                <div class="card-footer">
+                    <small class="text-muted">Last updated 3 mins ago</small>
+                </div>
+            </a>
         </div>
     }
     </div>
 
     <nav aria-label="Page navigation example">
     <ul class="pagination justify-content-center">
-        @if(ViewBag.CurPage == "1")
+        @if (ViewBag.CurPageNumber == "1")
         {
-            <li class="page-item disabled">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.PreviousPage>Previous</a>
-            </li>
-            <li class="page-item active"><a class="page-link" asp-page="/doctors" asp-route-currentPage=1 asp-route-doctorName="@(ViewData["DoctorFilter"])">1</a></li>
-            @for(var i = int.Parse(ViewBag.CurPage)+1; i < int.Parse(ViewBag.LastPage); i++)
+            if (ViewBag.LastPageNumber != "1")
             {
-                <li class="page-item"><a class="page-link" asp-page="/doctors" asp-route-currentPage=@i asp-route-doctorName="@(ViewData["DoctorFilter"])">@i</a></li>
-            }
+                <li class="page-item disabled">
+                    <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.PreviousPageNumber>Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" asp-page="/doctors" asp-route-currentPage=1 asp-route-doctorName="@(ViewData["DoctorFilter"])">1</a></li>
+                @for (var i = int.Parse(ViewBag.CurPageNumber) + 1; i < int.Parse(ViewBag.LastPageNumber); i++)
+                {
+                    <li class="page-item"><a class="page-link" asp-page="/doctors" asp-route-currentPage=@i asp-route-doctorName="@(ViewData["DoctorFilter"])">@i</a></li>
+                }
 
-            <li class="page-item">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPage asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
-            </li>
+                <li class="page-item">
+                    <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPageNumber asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
+                </li>
+            }
         }
-        else if(int.Parse(ViewBag.CurPage)+1 <= int.Parse(ViewBag.LastPage))
+        else if(int.Parse(ViewBag.CurPageNumber) +1 <= int.Parse(ViewBag.LastPageNumber))
         {
             <li class="page-item">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage="@ViewBag.PreviousPage" asp-route-doctorName="@(ViewData["DoctorFilter"])">Previous</a>
+                <a class="page-link" asp-page="/doctors" asp-route-currentPage="@ViewBag.PreviousPageNumber" asp-route-doctorName="@(ViewData["DoctorFilter"])">Previous</a>
             </li>
-            @for(var i = int.Parse(ViewBag.CurPage)-1; i <= int.Parse(ViewBag.CurPage)+1; i++)
+            @for(var i = int.Parse(ViewBag.CurPageNumber) -1; i <= int.Parse(ViewBag.CurPageNumber) +1; i++)
             {
-                @if(i == int.Parse(ViewBag.CurPage))
+                @if(i == int.Parse(ViewBag.CurPageNumber))
                 {
                     <li class="page-item active"><a class="page-link" asp-page="/doctors" asp-route-currentPage=@i asp-route-doctorName="@(ViewData["DoctorFilter"])">@i</a></li>
                 }
@@ -74,17 +79,17 @@
             }
 
             <li class="page-item">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPage asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
+                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPageNumber asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
             </li>
         }
         else
         {
             <li class="page-item">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.PreviousPage asp-route-doctorName="@(ViewData["DoctorFilter"])">Previous</a>
+                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.PreviousPageNumber asp-route-doctorName="@(ViewData["DoctorFilter"])">Previous</a>
             </li>
-            @for(var i = int.Parse(ViewBag.CurPage)-1; i <= int.Parse(ViewBag.CurPage); i++)
+            @for(var i = int.Parse(ViewBag.CurPageNumber) -1; i <= int.Parse(ViewBag.CurPageNumber); i++)
             {
-                @if(i == int.Parse(ViewBag.CurPage))
+                @if(i == int.Parse(ViewBag.CurPageNumber))
                 {
                     <li class="page-item active"><a class="page-link" asp-page="/doctors" asp-route-currentPage=@i asp-route-doctorName="@(ViewData["DoctorFilter"])">@i</a></li>
                 }
@@ -94,7 +99,7 @@
                 }
             }
             <li class="page-item disabled">
-                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPage asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
+                <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.NextPageNumber asp-route-doctorName="@(ViewData["DoctorFilter"])">Next</a>
             </li>
         }
         

@@ -27,5 +27,10 @@ namespace Hospital.Repository
         {
             return _context.Doctors.Where(i => i.Name.Contains(name));
         }
+
+        public Doctors GetDoctorDetails(Guid id)
+        {
+            return _context.Doctors.Where(i => i.Id == id).FirstOrDefault();
+        }
     }
 }

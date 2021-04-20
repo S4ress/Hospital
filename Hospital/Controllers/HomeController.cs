@@ -46,24 +46,22 @@ namespace Hospital.Controllers
             return RedirectToAction("Doctors");
         }
 
-        [HttpGet("doctors/{currentPage}/{doctorName}")]
+        public IActionResult Reform()
+        {
+            ViewData["CurPage"] = "2";
+            return View();
+        }
+
+        [Route("doctors/{currentPage}/{doctorName}")]
+        [Route("doctors/{currentPage}")]
         public IActionResult Doctors(DoctorFilter filter)
         {
-            ViewBag.CurPage = filter.currentPage.ToString();
-            if (filter.currentPage != 1)
-            {
-                ViewBag.NextPage = (filter.currentPage + 1).ToString();
-                ViewBag.PreviousPage = (filter.currentPage - 1).ToString();
-            }
-            else
-            {
-                ViewBag.NextPage = 2;
-            }
+            ViewData["CurPage"] = "1";
             
             IEnumerable<Doctors> doctors = null;
             if (filter.doctorName != null)
             {
-                //filter.currentPage = 1;
+                filter.currentPage = 1;
                 ViewData["DoctorFilter"] = filter.doctorName;
                 doctors = _repository.GetDoctorByName(filter.doctorName);
             }
@@ -73,11 +71,34 @@ namespace Hospital.Controllers
             }
 
             if(doctors.Count() % 6 != 0)
-                ViewBag.LastPage = ((doctors.Count() / 6)+1).ToString();
+                ViewBag.LastPageNumber = ((doctors.Count() / 6)+1).ToString();
             else
-                ViewBag.LastPage = (doctors.Count() / 6).ToString();
-            var x = doctors.Skip((filter.currentPage - 1) * 6).Take(6).ToList();
+                ViewBag.LastPageNumber = (doctors.Count() / 6).ToString();
+
+            List<Doctors> x;
+
+            if (filter.currentPage != 1)
+            {
+                x = doctors.Skip((filter.currentPage - 1) * 6).Take(6).ToList();
+                ViewBag.CurPageNumber = filter.currentPage.ToString();
+                ViewBag.NextPageNumber = (filter.currentPage + 1).ToString();
+                ViewBag.PreviousPageNumber = (filter.currentPage - 1).ToString();
+            }
+            else
+            {
+                x = doctors.Take(6).ToList();
+                ViewBag.CurPageNumber = "1";
+                ViewBag.NextPageNumber = 2;
+            }
+
             return View(x);
+        }
+
+        [Route("home/doctors/details/{id}")]
+        public IActionResult DoctorDetails(Guid id)
+        {
+            ViewData["CurPage"] = "1";
+            return View(_repository.GetDoctorDetails(id));
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

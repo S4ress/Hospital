@@ -12,5 +12,7 @@ namespace Hospital.Interfaces
         public IEnumerable<Doctors> GetAllDoctors();
 
         public IEnumerable<Doctors> GetDoctorByName(string name);
+
+        public Doctors GetDoctorDetails(Guid id);
     }
 }

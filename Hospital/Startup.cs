@@ -30,6 +30,7 @@ namespace Hospital
             services.AddDbContext<AppDbContext>(options =>
                    options.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=HospitalDb;Integrated Security=True"));
             services.AddScoped<IHomeRepository, HomeRepository>();
+            services.AddScoped<IPillsRepository, PillRepository>();
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddRazorPages();
             services.AddHttpClient();
