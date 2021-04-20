@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hospital</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-reboot.min.css" />
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap-utilities.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="~/fontawesome/css/all.css" />
 </head>
 <body class="main-header d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand" asp-controller="Home" asp-action="Index">Hospital</a>
+            <a class="navbar-brand ms-4" asp-controller="Home" asp-action="Index">Hospital</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -52,8 +55,6 @@
                             break;
                         }
                     }
-
-
                 </div>
             </div>
         </nav>
@@ -78,7 +79,7 @@
           <ul class="list-unstyled text-small">
             <li><a class="text-muted" href="#">Про нас</a></li>
             <li><a class="text-muted" asp-controller="Home" asp-action="Reform">Медична реформа</a></li>
-            <li><a class="text-muted" href="#">Страхування</a></li>
+            <li><a class="text-muted" asp-controller="Insurance" asp-action="Index">Страхування</a></li>
             <li><a class="text-muted" href="#">Контакти</a></li>
             <li><a class="text-muted" href="#">Згода користувача</a></li>
           </ul>
@@ -86,10 +87,10 @@
         <div class="col-6 col-md">
           <h5>Служба технічної підтримки</h5>
           <ul class="list-unstyled text-small">
-            <li><a class="text-muted"  href="tel:380445801070">+38 044 580-10-70</a></li>
-            <li><a class="text-muted" href="tel:380735801070">+38 073 580-10-70</a></li>
-            <li><a class="text-muted" href="tel:380665801070">+38 066 580-10-70</a></li>
-            <li><a class="text-muted" href="tel:380685801070">+38 068 580-10-70</a></li>
+            <li><a class="text-muted"  href="tel:380951483461">+38 095 148-34-61</a></li>
+            <li><a class="text-muted" href="tel:380684392842">+38 068 439-28-42</a></li>
+            <li><a class="text-muted" href="tel:380990277995">+38 099 027-79-95</a></li>
+            <li><a class="text-muted" href="tel:38066241817">+38 066 214-18-17</a></li>
             <li>Тільки з питань роботи порталу,</li>
             
           </ul>

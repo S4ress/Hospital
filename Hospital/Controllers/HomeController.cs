@@ -94,7 +94,7 @@ namespace Hospital.Controllers
             return View(x);
         }
 
-        [Route("home/doctors/details/{id}")]
+        [Route("home/doctordetails/{id}")]
         public IActionResult DoctorDetails(Guid id)
         {
             ViewData["CurPage"] = "1";

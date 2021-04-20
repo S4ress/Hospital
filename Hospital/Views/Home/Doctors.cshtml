@@ -3,17 +3,17 @@
 }
 
 <div class="d-flex justify-content-center">
-    <div class="w-50 mt-5">
+    <div class="w-50 my-5">
         <div class="input-group d-flex justify-content-center">
-            <div class="input-group-append">
+            <div class="d-flex">
                 @using (Html.BeginForm("Doctors", "Home", FormMethod.Get, new {@class="d-flex"}))
                 {
                     <input autocomplete="off" value="@(ViewData["DoctorFilter"])" type="text" name="DoctorName" Id="DoctorName" class="form-control" placeholder="Введіть прізвище">
-                    <button class="btn btn-outline-secondary ml-2" type="submit" value="Doctors">Знайти</button>
+                    <button class="btn btn-outline-secondary ms-2" type="submit" value="Doctors">Знайти</button>
                 }
                 @using (Html.BeginForm("AllDoctors", "Home", FormMethod.Get, new {@class="d-flex"}))
                 {
-                    <button class="btn btn-outline-secondary ml-2" type="submit">Очистить</button>
+                    <button class="btn btn-outline-secondary ms-1" type="submit">Очистить</button>
                 }
             </div>
         </div>
@@ -23,20 +23,20 @@
 
 @if(Model.Count > 0)
 {
-    <div class="card-columns mt-5">
+    <div class="row row-cols-md-3 g-4 mb-5">
     @foreach(var doctor in Model)
     {
-        <div class="card">
-            <a href="doctors/details/@doctor.Id" class="text-decoration-none text-dark">
-                <img class="card-img-top" src="~/Pictures/Doctors/@doctor.Picture" alt="Card image cap">
-                <div class="card-body">
-                    <h5 class="card-title">@doctor.Name</h5>
-                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
-            </a>
+        <div class="col">
+            <div class="card p-3" style="width: 18rem;">
+                <a class="nav-item nav-link text-decoration-none text-dark" asp-controller="Home" asp-action="DoctorDetails" asp-route-id="@doctor.Id">
+                    <img class="card-img-top" src="~/Pictures/Doctors/@doctor.Picture" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@doctor.Name</h5>
+                        <p class="card-text">@doctor.Position</p>
+                        <p class="card-text">@doctor.Address</p>
+                    </div>
+                </a>
+            </div>
         </div>
     }
     </div>
@@ -51,7 +51,7 @@
                     <a class="page-link" asp-page="/doctors" asp-route-currentPage=@ViewBag.PreviousPageNumber>Previous</a>
                 </li>
                 <li class="page-item active"><a class="page-link" asp-page="/doctors" asp-route-currentPage=1 asp-route-doctorName="@(ViewData["DoctorFilter"])">1</a></li>
-                @for (var i = int.Parse(ViewBag.CurPageNumber) + 1; i < int.Parse(ViewBag.LastPageNumber); i++)
+                @for (var i = int.Parse(ViewBag.CurPageNumber) + 1; i <= int.Parse(ViewBag.LastPageNumber); i++)
                 {
                     <li class="page-item"><a class="page-link" asp-page="/doctors" asp-route-currentPage=@i asp-route-doctorName="@(ViewData["DoctorFilter"])">@i</a></li>
                 }
